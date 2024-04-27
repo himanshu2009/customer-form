@@ -54,7 +54,7 @@ function PersonDetails({
     },
     {
       label: "Website Address",
-      name: " websiteAddress",
+      name: "websiteAddress",
       type: "text",
       inputType: "normal",
     },
@@ -72,56 +72,63 @@ function PersonDetails({
     },
     {
       label: "Telephone Numbers Of Company Representative",
-      name: "telephoneNoOfRepresentativeDirect",
+      name: [
+        "telephoneNoOfRepresentativeDirect",
+        "telephoneNoOfRepresentativeMobile",
+      ],
       options: ["Direct Number", "Mobile Number"],
       inputType: "Advance",
-      type: "text",
     },
-    {
-      label: "Mobile Number",
-      name: "telephoneNoOfRepresentativeMobile",
-      type: "text",
-    },
+
     {
       label: "Date Company was established(min. 3 years required)",
       name: "establishedDate",
       type: "date",
       inputType: "normal",
     },
+
     {
-      label: "Year",
-      name: " year1",
-      type: "date",
+      label: "Gross Annual Sales for the Last Three Years",
+      datafields: [
+        {
+          label: "Year",
+          name: "year1",
+          type: "date",
+        },
+        {
+          label: "Year",
+          name: "year2",
+          type: "date",
+        },
+        {
+          label: "Year",
+          name: "year3",
+          type: "date",
+        },
+        {
+          label: "CHF",
+          name: "chf1",
+          type: "text",
+        },
+        {
+          label: "CHF",
+          name: "chf2",
+          type: "text",
+        },
+        {
+          label: "CHF",
+          name: "chf3",
+          type: "text",
+        },
+      ],
+      inputType: "superior",
     },
-    {
-      label: "Year",
-      name: " year2",
-      type: "date",
-    },
-    {
-      label: "Year",
-      name: " year3",
-      type: "date",
-    },
-    {
-      label: "CHF",
-      name: " chf1",
-      type: "text",
-    },
-    {
-      label: "CHF",
-      name: " chf2",
-      type: "text",
-    },
-    {
-      label: "CHF",
-      name: " chf3",
-      type: "text",
-    },
+
     {
       label: "Details Of Service",
-      name: " detailsOfService",
+      name: "detailsOfService",
       type: "text",
+      inputType: "normal",
     },
   ];
   const { values, errors, touched, handleChange, handleSubmit } = useFormik({
@@ -133,8 +140,10 @@ function PersonDetails({
     },
   });
 
-  console.log("errors in form", errors);
-  console.log("touched in form", touched);
+  console.log("values", values);
+
+  // console.log("errors in form", errors);
+  // console.log("touched in form", touched);
 
   return (
     <>
@@ -143,7 +152,7 @@ function PersonDetails({
         <div className="  h-[100%] flex flex-row justify-center items-center  ">
           <form className="w-[50%]" onSubmit={handleSubmit}>
             <div className="  text-sm  font-bold text-gray-800">
-              <h4>SECTION 1: COMPANY DETAI LS AND GENERAL INFORMATION</h4>
+              <h4>SECTION 1: COMPANY DETAILS AND GENERAL INFORMATION</h4>
             </div>
 
             <label className=" w-[100%]" htmlFor="telephoneNoOfRepresentative">
@@ -160,9 +169,10 @@ function PersonDetails({
                 // // key={field.name}
                 // label={field.label}
                 // // name={field.name}
+                key={field.label}
                 field={field}
-                value={values[field.name]}
-                error={errors[field.name]}
+                value={values}
+                error={errors}
                 touched={touched}
                 onChange={handleChange}
               />
@@ -230,12 +240,14 @@ function PersonDetails({
               ) : null}
             </div>
 
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Submit
-            </button>
+            <div className=" w-[90%] justify-evenly flex flex-row-reverse border-2">
+              <button
+                type="submit"
+                className=" my-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </div>
